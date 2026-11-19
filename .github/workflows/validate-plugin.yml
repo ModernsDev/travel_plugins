@@ -1,0 +1,37 @@
+name: Plugin CI
+on: [push, pull_request]
+
+permissions:
+  contents: read
+
+jobs:
+  validate-plugin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate Travel plugin
+        run: |
+          python3 - <<'PY'
+          import json
+          import re
+          from pathlib import Path
+
+          marketplace = json.loads(Path('.agents/plugins/marketplace.json').read_text())
+          plugin = Path('plugins/travel-moderns')
+          manifest = json.loads((plugin / 'plugin.json').read_text())
+          assert {
+              'name': manifest['name'],
+              'source': {'source': 'local', 'path': f'./{plugin.as_posix()}'},
+          } in marketplace['plugins'], 'Travel plugin marketplace entry is missing or incorrect'
+          assert re.fullmatch(r'\d+\.\d+\.\d+', manifest['version']), 'Invalid plugin version'
+          server = json.loads((plugin / 'mcp.json').read_text())['mcpServers']['travel']
+          assert server['type'] == 'streamable-http' and server['url'].startswith('https://'), 'Invalid Travel MCP endpoint'
+          paths = sorted((plugin / 'skills').glob('*/SKILL.md'))
+          assert paths, 'No packaged skills'
+          for path in paths:
+              parts = path.read_text(encoding='utf-8').split('---\n', 2)
+              assert len(parts) == 3 and not parts[0] and parts[2].strip(), f'Missing frontmatter or body in {path}'
+              assert re.search(rf'^name: {re.escape(path.parent.name)}$', parts[1], re.M), f'Invalid name in {path}'
+              assert re.search(r'^description: \S', parts[1], re.M), f'Missing description in {path}'
+          print(f'Validated Travel plugin and {len(paths)} skills')
+          PY
