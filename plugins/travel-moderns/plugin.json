@@ -1,0 +1,46 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "travel-moderns",
+  "version": "0.1.2",
+  "description": "在 ChatGPT 中查看家庭旅行和已登记的预订，更新每日安排，保存想去的地方。",
+  "author": {
+    "name": "Travel Moderns"
+  },
+  "homepage": "https://travel.moderns.dev",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "行间 Travel",
+        "shortDescription": "家庭旅行管家",
+        "defaultPrompt": [
+          "列出我家已登记的旅行名称和日期。",
+          "帮我核对下一趟旅行每天的安排和已登记的预订。",
+          "看看我家已经保存了哪些想去的地方。"
+        ],
+        "logo": "./assets/logo.png",
+        "composerIcon": "./assets/logo.png",
+        "longDescription": "为已有行间账号的家庭提供旅行管理。用自己的行间账号完成 OAuth 授权后，可以查看家庭旅行、已登记的预订、每日安排、成员偏好和旅行权益，更新行程并保存想去的地方。预订功能用于管理已登记的记录。",
+        "developerName": "Travel Moderns",
+        "category": "Productivity",
+        "capabilities": [
+          "查询旅行与预订",
+          "维护每日安排",
+          "保存旅行想法",
+          "查看旅行权益"
+        ],
+        "websiteURL": "https://travel.moderns.dev",
+        "brandColor": "#315A49"
+      },
+      "publication": {
+        "release_notes": "插件显示名更新为「行间 Travel」，补充简介、功能、网站和示例提问。"
+      }
+    }
+  },
+  "keywords": [
+    "travel",
+    "itinerary",
+    "trip-planning",
+    "家庭旅行",
+    "行程"
+  ]
+}

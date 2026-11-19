@@ -1,0 +1,15 @@
+{
+  "name": "travel-private",
+  "interface": {
+    "displayName": "行间 Travel"
+  },
+  "plugins": [
+    {
+      "name": "travel-moderns",
+      "source": {
+        "source": "local",
+        "path": "./plugins/travel-moderns"
+      }
+    }
+  ]
+}
