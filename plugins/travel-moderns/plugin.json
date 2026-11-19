@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "travel-moderns",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Look up family travel, update itineraries, record confirmed bookings, and manage travel ideas and credits.",
   "author": {
     "name": "Travel Moderns"
@@ -32,7 +32,7 @@
         "brandColor": "#315A49"
       },
       "publication": {
-        "release_notes": "Adds five dedicated skills for travel lookup, itinerary changes, booking records, travel ideas, and travel credits."
+        "release_notes": "Adds a skill for verifying loyalty accounts and card benefits from authorized sources and recording evidence in Travel."
       }
     }
   },
